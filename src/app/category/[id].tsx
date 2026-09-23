@@ -1,9 +1,9 @@
 // ============================================================================
-// PADRÃO BIG TRIPE (ANTI-PADRÃO: TUDO NO MESMO ARQUIVO)
-// Tela de Categoria: Listagem de Itens por Categoria selecionada
+// PADRÃO MVVM SIMPLIFICADO
+// View da Tela de Categoria: Listagem de Itens por Categoria selecionada
 // ============================================================================
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   View,
   Text,
@@ -16,44 +16,15 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { simularConsultaProdutosPorCategoria } from "../../data/mockDatabase";
+import { useCategoryViewModel } from "../../viewmodels/useCategoryViewModel";
 
 export default function CategoryScreen() {
   const router = useRouter();
   const { id } = useLocalSearchParams<{ id: string }>();
 
-  // Estados locais controlados na própria View (Sem separação de ViewModel)
-  const [carregando, setCarregando] = useState<boolean>(true);
-  const [produtos, setProdutos] = useState<any[]>([]);
-
-  // Título amigável da categoria
-  const nomeCategoria =
-    id === "bebidas" ? "Bebidas" : id === "comidas" ? "Comidas" : "Cardápio";
-
-  useEffect(() => {
-    // Consulta direta com atraso simulado de banco de dados
-    async function carregarProdutos() {
-      if (!id) return;
-      try {
-        setCarregando(true);
-        const resultado = await simularConsultaProdutosPorCategoria(
-          Array.isArray(id) ? id[0] : id
-        );
-        setProdutos(resultado);
-      } catch (erro) {
-        console.error("Erro ao buscar produtos da categoria:", erro);
-      } finally {
-        setCarregando(false);
-      }
-    }
-
-    carregarProdutos();
-  }, [id]);
-
-  // Função auxiliar de formatação de moeda dentro do arquivo da tela
-  function formatarPreco(valor: number): string {
-    return `R$ ${valor.toFixed(2).replace(".", ",")}`;
-  }
+  // Consome estados, dados e funções formatadoras do ViewModel
+  const { carregando, produtos, nomeCategoria, formatarPreco } =
+    useCategoryViewModel(id);
 
   return (
     <View style={styles.tela}>

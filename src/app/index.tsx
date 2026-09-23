@@ -1,9 +1,9 @@
 // ============================================================================
-// PADRÃO BIG TRIPE (ANTI-PADRÃO: TUDO NO MESMO ARQUIVO)
-// Tela Inicial: Apresentação das Categorias (Comidas e Bebidas)
+// PADRÃO MVVM SIMPLIFICADO
+// View da Tela Inicial: Apresentação da interface de Categorias
 // ============================================================================
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   View,
   Text,
@@ -16,31 +16,13 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { simularConsultaCategorias } from "../data/mockDatabase";
+import { useHomeViewModel } from "../viewmodels/useHomeViewModel";
 
 export default function HomeScreen() {
   const router = useRouter();
 
-  // Estados gerenciados diretamente na View (Sem ViewModel)
-  const [carregando, setCarregando] = useState<boolean>(true);
-  const [categorias, setCategorias] = useState<any[]>([]);
-
-  useEffect(() => {
-    // Busca direta do banco simulado com delay assíncrono
-    async function carregarDados() {
-      try {
-        setCarregando(true);
-        const resultado = await simularConsultaCategorias();
-        setCategorias(resultado);
-      } catch (error) {
-        console.error("Erro ao carregar categorias:", error);
-      } finally {
-        setCarregando(false);
-      }
-    }
-
-    carregarDados();
-  }, []);
+  // Consome estados e dados providos pelo ViewModel
+  const { carregando, categorias } = useHomeViewModel();
 
   return (
     <View style={styles.tela}>

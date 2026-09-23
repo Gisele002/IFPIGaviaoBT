@@ -1,9 +1,9 @@
 // ============================================================================
-// PADRÃO BIG TRIPE (ANTI-PADRÃO: TUDO NO MESMO ARQUIVO)
-// Tela de Detalhes do Produto: Apresentação completa e controle de quantidade
+// PADRÃO MVVM SIMPLIFICADO
+// View da Tela de Detalhes do Produto: Apresentação completa e controle visual
 // ============================================================================
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   View,
   Text,
@@ -16,50 +16,21 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { simularConsultaProdutoPorId } from "../../data/mockDatabase";
+import { useItemDetailViewModel } from "../../viewmodels/useItemDetailViewModel";
 
 export default function ItemDetailScreen() {
   const router = useRouter();
   const { id } = useLocalSearchParams<{ id: string }>();
 
-  // Estados locais controlados diretamente na tela (Sem ViewModel)
-  const [carregando, setCarregando] = useState<boolean>(true);
-  const [produto, setProduto] = useState<any>(null);
-  const [quantidade, setQuantidade] = useState<number>(1);
-
-  useEffect(() => {
-    // Consulta direta ao banco de dados com simulação de delay
-    async function carregarDetalhes() {
-      if (!id) return;
-      try {
-        setCarregando(true);
-        const prodId = Array.isArray(id) ? id[0] : id;
-        const resultado = await simularConsultaProdutoPorId(prodId);
-        setProduto(resultado);
-      } catch (erro) {
-        console.error("Erro ao buscar detalhes do produto:", erro);
-      } finally {
-        setCarregando(false);
-      }
-    }
-
-    carregarDetalhes();
-  }, [id]);
-
-  // Lógica de negócio de incremento/decremento embutida diretamente na View
-  function decrementarQuantidade() {
-    if (quantidade > 1) {
-      setQuantidade((prev) => prev - 1);
-    }
-  }
-
-  function incrementarQuantidade() {
-    setQuantidade((prev) => prev + 1);
-  }
-
-  function formatarPreco(valor: number): string {
-    return `R$ ${valor.toFixed(2).replace(".", ",")}`;
-  }
+  // Consome os dados, estados e ações do ViewModel
+  const {
+    carregando,
+    produto,
+    quantidade,
+    decrementarQuantidade,
+    incrementarQuantidade,
+    formatarPreco,
+  } = useItemDetailViewModel(id);
 
   return (
     <View style={styles.tela}>
