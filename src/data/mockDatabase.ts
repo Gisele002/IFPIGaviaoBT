@@ -37,7 +37,7 @@ export const BANCO_PRODUTOS = [
     carboidratos: "32g",
     gorduras: "18g",
     imagem: require("../../assets/images/menu/pastel-de-carne.png"),
-    imagemGrande: require("../../assets/images/menu/pastel-de-carne.png"),
+    imagemGrande: require("../../assets/images/menu/pastel-de-carne-large.png"),
   },
   {
     id: "coxinha-de-frango",
@@ -51,7 +51,7 @@ export const BANCO_PRODUTOS = [
     carboidratos: "38g",
     gorduras: "15g",
     imagem: require("../../assets/images/menu/coxinha-de-frango.png"),
-    imagemGrande: require("../../assets/images/menu/coxinha-de-frango.png"),
+    imagemGrande: require("../../assets/images/menu/coxinha-de-frango-large.png"),
   },
   {
     id: "cuscuz-com-ovo",
@@ -65,7 +65,7 @@ export const BANCO_PRODUTOS = [
     carboidratos: "40g",
     gorduras: "9g",
     imagem: require("../../assets/images/menu/cuscuz-com-ovo.png"),
-    imagemGrande: require("../../assets/images/menu/cuscuz-com-ovo.png"),
+    imagemGrande: require("../../assets/images/menu/cuscuz-com-ovo-large.png"),
   },
   {
     id: "arrumadinho-completo",
@@ -93,7 +93,7 @@ export const BANCO_PRODUTOS = [
     carboidratos: "26g",
     gorduras: "0g",
     imagem: require("../../assets/images/menu/suco-de-laranja.png"),
-    imagemGrande: require("../../assets/images/menu/suco-de-laranja.png"),
+    imagemGrande: require("../../assets/images/menu/suco-de-laranja-large.png"),
   },
   {
     id: "refrigerante-lata",
@@ -107,7 +107,7 @@ export const BANCO_PRODUTOS = [
     carboidratos: "37g",
     gorduras: "0g",
     imagem: require("../../assets/images/menu/refrigerante.png"),
-    imagemGrande: require("../../assets/images/menu/refrigerante.png"),
+    imagemGrande: require("../../assets/images/menu/refrigerante-large.png"),
   },
   {
     id: "cafe-expresso",
@@ -121,7 +121,7 @@ export const BANCO_PRODUTOS = [
     carboidratos: "1g",
     gorduras: "0g",
     imagem: require("../../assets/images/menu/cafe-expresso.png"),
-    imagemGrande: require("../../assets/images/menu/cafe-expresso.png"),
+    imagemGrande: require("../../assets/images/menu/cafe-expresso-large.png"),
   },
   {
     id: "suco-acerola",
@@ -135,7 +135,7 @@ export const BANCO_PRODUTOS = [
     carboidratos: "15g",
     gorduras: "0g",
     imagem: require("../../assets/images/menu/suco-acerola.png"),
-    imagemGrande: require("../../assets/images/menu/suco-acerola.png"),
+    imagemGrande: require("../../assets/images/menu/suco-acerola-large.png"),
   },
 ];
 
